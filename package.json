@@ -1,6 +1,6 @@
 {
   "name": "RossHathaway-reviews",
-  "version": "1",
+  "version": "1.0.0",
   "description": "Amazon product page review component",
   "author": "Ross Hathaway",
   "license": "free",
@@ -11,9 +11,11 @@
     "dev": "webpack-dev-server"
   },
   "dependencies": {
+    "better-sqlite3": "^5.4.0",
+    "faker": "^4.1.0",
+    "file-system": "^2.2.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "sqlite3": "^4.0.6"
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
