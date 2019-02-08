@@ -9,7 +9,7 @@ const makeTables = fs.readFileSync(path.join(__dirname, './schema.sql'), 'utf8')
 db.exec(makeTables);
 
 const insertProd = db.prepare('INSERT INTO products (name) VALUES (?)')
-const insertRev = db.prepare('INSERT INTO reviews (prod_id, username, stars, title, verifiedPurchase, helpfulCount, body, avatarLink, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+const insertRev = db.prepare('INSERT INTO reviews (prod_id, username, stars, title, verifiedPurchase, helpfulCount, body, avatarLink, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
 const insertCom = db.prepare('INSERT INTO comments (username, ref_comment_id, review_id, body, date) VALUES (?, ?, ?, ?, ?)')
 const insertPic = db.prepare('INSERT INTO pictures (review_id, url) VALUES (?, ?)')
 const insertVid = db.prepare('INSERT INTO videos (review_id, url) VALUES (?, ?)')
@@ -44,11 +44,11 @@ for (let i = 1; i <= 100; i++){
     if (Math.random() >= 0.9) {
       for (let i = 0; i < Math.floor(Math.random() * 6); i ++) {
         const url = faker.image.image(Math.floor(Math.random() * 60) + 80, 88)
-        insertPic(lastInsertRowid, url)
+        insertPic.run(lastInsertRowid, url)
       }
     }
     if (Math.random() >= 0.9) {
-      insertPic(lastInsertRowid, 'https://www.youtube.com/watch?v=NpEaa2P7qZI')
+      insertVid.run(lastInsertRowid, 'https://www.youtube.com/watch?v=NpEaa2P7qZI')
     }
 
     // insert rand # of comments between 1 and 10 for each review
@@ -57,10 +57,11 @@ for (let i = 1; i <= 100; i++){
       // (username, ref_comment_id, review_id, body, date)
       const username = faker.name.findName()
       const review_id = lastInsertRowid
-      const comDate = JSON.stringify(faker.date.between(date.slice(0, 10), `${Date.now().getFullYear()}-${Date.now().getMonth() + 1}-${Date.now().getDate()}`))
+      const currDate = new Date()
+      const comDate = JSON.stringify(faker.date.between(date.slice(0, 10), `${currDate.getFullYear()}-${currDate.getMonth() + 1}-${currDate.getDate()}`))
       const body = faker.lorem.paragraph(Math.floor(Math.random() * 5) + 1)
-
-      const {lastInsertRowid: ref_comment_id} = insertCom.run(username, 'null', review_id, comDate, body)
+// console.log review_id
+      const {lastInsertRowid: ref_comment_id} = insertCom.run(username, 'null', review_id, body, comDate)
       // low probability of having a comment reference another comment
       if (Math.random() >= 0.9) {
         // add 1 - 5 comments
@@ -69,7 +70,7 @@ for (let i = 1; i <= 100; i++){
           // (username, ref_comment_id, review_id, body, date)
           const username = faker.name.findName()
           const review_id = lastInsertRowid
-          const comDate = JSON.stringify(faker.date.between(date.slice(0, 10), `${Date.now().getFullYear()}-${Date.now().getMonth() + 1}-${Date.now().getDate()}`))
+          const comDate = JSON.stringify(faker.date.between(date.slice(0, 10), `${currDate.getFullYear()}-${currDate.getMonth() + 1}-${currDate.getDate()}`))
           const body = faker.lorem.paragraph(Math.floor(Math.random() * 5) + 1)
           // all reference same comment - save previously inserted id from outside if block
           insertCom.run(username, ref_comment_id, review_id, comDate, body)
