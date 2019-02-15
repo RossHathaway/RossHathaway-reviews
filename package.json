@@ -5,17 +5,41 @@
   "author": "Ross Hathaway",
   "license": "free",
   "engines": {
-    "node": ">=6.13.0"
+    "node": ">=10.15.1"
   },
   "scripts": {
-    "dev": "webpack-dev-server"
+    "test": "jest",
+    "test:watch": "npm run test -- --watch",
+    "client:dev": "webpack-dev-server",
+    "server": "nodemon server/index.js"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverageFrom": [
+      "**/*.{js, jsx}",
+      "!**/node_modules/**",
+      "!./public/**"
+    ],
+    "coverageDirectory": "./coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 60,
+        "functions": 80,
+        "lines": 50,
+        "statements": -10
+      }
+    }
   },
   "dependencies": {
     "better-sqlite3": "^5.4.0",
+    "css-loader": "^2.1.0",
     "faker": "^4.1.0",
     "file-system": "^2.2.2",
+    "node-sass": "^4.11.0",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

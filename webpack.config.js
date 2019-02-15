@@ -1,14 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
 const SRC_DIR = path.join(__dirname, './client/src');
-const PORT = 8000;
+const PORT = 3000;
 
 module.exports = {
   mode: 'development',
   entry: [`${SRC_DIR}/app.js`],
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '/client/dist'),
   },
   module: {
     rules: [
