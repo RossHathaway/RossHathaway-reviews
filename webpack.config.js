@@ -51,5 +51,8 @@ module.exports = {
     port: process.env.PORT || PORT,
     compress: true,
     contentBase: path.join(__dirname, './public'),
+    proxy: {
+      '/products' :'http://localhost:3001'
+    },
   },
 };
