@@ -11,16 +11,20 @@ app.get('/products/:prodId', (req, res) => {
   console.log(db)
 
   db.all(`select * from reviews where prod_id = ? ORDER BY helpfulCount DESC LIMIT 8`, req.params.prodId, (err, rows) => {
-      if (err) console.log(err)
-      else {
+      if (err) {
+        console.log(err)
+      } else {
         console.log('successfully got pictures from db to index.js')
         pics = rows
       }
     })
 
   db.all(`select p.review_id, p.picUrl from reviews r INNER JOIN pictures p ON r.id = p.review_id where r.prod_id = ? ORDER BY r.helpfulCount DESC LIMIT 4`, req.params.prodId, (err, rows) => {
-      if (err) console.error(err)
-      else pics = rows
+      if (err) {
+        console.error(err)
+      } else {
+        reviews = rows
+      }
   })
 
   const ratingsByStars = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, total: 0}
