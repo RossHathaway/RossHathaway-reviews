@@ -5,28 +5,26 @@ const morgan = require('morgan')
 const PORT = process.env.PORT || 3001
 const app = express()
 
-app.use(morgan)
+app.use(morgan('dev'))
 
 app.get('/products/:prodId/:recent', (req, res) => {
   let pics = null
   let reviews = null
   let ratingsByStars = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, total: 0}
-  // console.log(req.params.prodId)
-  // console.log(db)
-  db.all(`select * from reviews where prod_id = ? ORDER BY ${req.params.recent ? 'r.revDate' : 'r.helpfulCount'} DESC LIMIT 8`, req.params.prodId, (err, rows) => {
+
+  db.all(`select * from reviews AS r where prod_id = ? ORDER BY ${req.params.recent ? 'r.revDate' : 'r.helpfulCount'} DESC LIMIT 8`, req.params.prodId, (err, rows) => {
       if (err) {
         console.log(err)
       } else {
-        console.log('Rows: ', rows)
-        console.log('successfully got pictures from db to index.js')
-        pics = rows
+        reviews = rows
       }
     })
-    .all(`select p.review_id, p.picUrl from reviews r INNER JOIN pictures p ON r.id = p.review_id where r.prod_id = ? ORDER BY helpfulCount DESC LIMIT 4`, req.params.prodId, (err, rows) => {
+    .all(`select p.review_id, p.picUrl from reviews AS r INNER JOIN pictures AS p ON r.id = p.review_id WHERE r.prod_id = ? ORDER BY helpfulCount DESC LIMIT 4`, req.params.prodId, (err, rows) => {
         if (err) {
           console.error(err)
         } else {
-          reviews = rows
+          console.log('pictures', rows)
+          pics = rows
         }
     })
     .each('SELECT stars FROM reviews', (err, {stars}) => {
@@ -44,11 +42,10 @@ app.get('/products/:prodId/:recent', (req, res) => {
         aveRating = (aveRating / ratingsByStars.total).toFixed(1)
         ratingsByStars.ave = aveRating
         
-        res.send({reviews: reviews, pics: pics, stats: ratingsByStars})
+        res.status(200).send({reviews: reviews, pics: pics, stats: ratingsByStars})
       }
     })
   })  
-
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
