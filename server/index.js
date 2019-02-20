@@ -11,7 +11,7 @@ app.get('/products/:prodId/:recent', (req, res) => {
   let pics = null
   let reviews = null
   let ratingsByStars = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, total: 0}
-
+// serialize
   db.all(`select * from reviews AS r where prod_id = ? ORDER BY ${req.params.recent ? 'r.revDate' : 'r.helpfulCount'} DESC LIMIT 8`, req.params.prodId, (err, rows) => {
       if (err) {
         console.log(err)
@@ -23,11 +23,10 @@ app.get('/products/:prodId/:recent', (req, res) => {
         if (err) {
           console.error(err)
         } else {
-          console.log('pictures', rows)
           pics = rows
         }
     })
-    .each('SELECT stars FROM reviews', (err, {stars}) => {
+    .each('SELECT stars FROM reviews WHERE reviews.prod_id = ?', req.params.prodId, (err, {stars}) => {
       ratingsByStars[stars]++
     },
     (err, rowCount) => {
@@ -37,8 +36,13 @@ app.get('/products/:prodId/:recent', (req, res) => {
         let aveRating = 0
         for (let key in ratingsByStars) {
           const count = ratingsByStars[key]
-          aveRating += (count * key)
+          if (key !== 'total') {
+            let numKey = Number(key)
+            console.log('type of converted key', typeof numKey, numKey)
+            aveRating += (count * numKey)
+          }
         }
+        console.log('aveRating', aveRating)
         aveRating = (aveRating / ratingsByStars.total).toFixed(1)
         ratingsByStars.ave = aveRating
         
