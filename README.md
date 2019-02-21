@@ -18,7 +18,7 @@
 
 ## Usage
 
-> Some usage instructions
+> This will render to html element with id of reviews
 
 ## Requirements
 

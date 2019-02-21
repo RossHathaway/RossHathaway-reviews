@@ -2,12 +2,19 @@ const express = require('express')
 const Sqlite = require('sqlite3').verbose()
 const db = require('../database/dbIndex.js')
 const morgan = require('morgan')
+const cors = require('cors')
 const PORT = process.env.PORT || 3001
+const corsOptions = {
+  origin: 'http://localhost:3005',
+  optionsSuccessStatus: 200
+}
 const app = express()
 
 app.use(morgan('dev'))
+app.use(cors())
 
-app.get('/products/:prodId/:recent', (req, res) => {
+app.get('/products/:prodId/:recent', (req, res, next) => {
+  console.log('running database queries')
   let pics = null
   let reviews = null
   let ratingsByStars = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, total: 0}
@@ -16,6 +23,7 @@ app.get('/products/:prodId/:recent', (req, res) => {
         if (err) {
           console.log(err)
         } else {
+          console.log('reviews', rows)
           reviews = rows
         }
       })
@@ -23,6 +31,7 @@ app.get('/products/:prodId/:recent', (req, res) => {
           if (err) {
             console.error(err)
           } else {
+            console.log('pics', rows)
             pics = rows
           }
       })
@@ -46,11 +55,15 @@ app.get('/products/:prodId/:recent', (req, res) => {
           aveRating = (aveRating / ratingsByStars.total).toFixed(1)
           ratingsByStars.ave = aveRating
           
-          res.status(200).send({reviews: reviews, pics: pics, stats: ratingsByStars})
+          res.send({reviews: reviews, pics: pics, stats: ratingsByStars})
         }
       })
     })
   })  
+
+app.get('/bundle', (req, res) => {
+  res.sendFile('/home/ross/Bootcamp/Galvanize/part2/FEC/RossHathaway-reviews/client/dist/bundle.js')
+})
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
