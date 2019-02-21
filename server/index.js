@@ -3,6 +3,7 @@ const Sqlite = require('sqlite3').verbose()
 const db = require('../database/dbIndex.js')
 const morgan = require('morgan')
 const cors = require('cors')
+const path = require('path')
 const PORT = process.env.PORT || 3001
 const corsOptions = {
   origin: 'http://localhost:3005',
@@ -12,6 +13,7 @@ const app = express()
 
 app.use(morgan('dev'))
 app.use(cors())
+app.use(express.static(path.join(__dirname, '../client/public')))
 
 app.get('/products/:prodId/:recent', (req, res, next) => {
   console.log('running database queries')
