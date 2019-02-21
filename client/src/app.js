@@ -22,7 +22,7 @@ class ReviewComp extends React.Component {
     }
     
     componentDidMount() {
-      axios.get(`http://localhost:3001/products/100/false`)
+      axios.get(`http://18.221.115.47/products/100/false`)
         .then(({data}) => {
           console.log(data)
           this.setState(data)
