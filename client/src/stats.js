@@ -7,7 +7,7 @@ const Statbar = (props) => {
     for (let i = 1; i <= Math.round(props.stats.ave); i++) {
       span.push(<img src={'./fullStar.png'} key={i}/>)
     }
-    for (let i = 1; i <= 5 - Math.round(props.ave); i++) {
+    for (let i = 1; i <= (5 - Math.round(props.ave)); i++) {
       span.push(<img src={'./emptyStar.png'} key={i}/>)
     }
     console.log(span)

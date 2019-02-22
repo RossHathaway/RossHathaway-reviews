@@ -12,7 +12,7 @@ app.use(morgan('dev'))
 app.use(cors())
 app.use(express.static(path.join(__dirname, '../client/public')))
 
-app.get('/products/:prodId/:recent', (req, res) => {
+app.get('/:id/:recent', (req, res) => {
   console.log('running database queries')
   let pics = null
   let reviews = null

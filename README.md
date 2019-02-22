@@ -19,6 +19,8 @@
 ## Usage
 
 > This will render to html element with id of reviews
+> Server serves bundle.js in client/public/bundle.js on GET request to /bundle
+> Server serves review component on GET request to /:prodId/:recent (recent is true or false for whether reviews are sorted by date or helpfulCount - default is helpfulCount)
 
 ## Requirements
 
