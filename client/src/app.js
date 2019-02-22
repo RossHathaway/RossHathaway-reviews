@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 // import ReactModal from 'react-modal';
 import axios from 'axios'
 import Statbar from './stats.js'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+// import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 // import stylecomponents from 'stylecomponents'
 /*
 const reviewbody = stylecomponents.div`styles`
@@ -57,4 +57,5 @@ class ReviewComp extends React.Component {
 
 
 
-ReactDOM.render(<Router><Route path="/:id" component={ReviewComp}/></Router>, document.getElementById('reviews'))
+ReactDOM.render(<ReviewComp />, document.getElementById('reviews'))
+// ReactDOM.render(<Router><Route path="/:id" component={ReviewComp}/></Router>, document.getElementById('reviews'))
