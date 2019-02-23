@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Statbar from './stats.js'
 import Pictures from './pictures.js'
 import Reviews from './reviews.js'
+
 // import stylecomponents from 'stylecomponents'
 /*
 const reviewbody = stylecomponents.div`styles`
@@ -19,7 +20,6 @@ class ReviewComp extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        sortedByRecent: false,
         prodId: this.props.match.params.id
       }
       this.getReviews = this.getReviews.bind(this)
@@ -29,9 +29,6 @@ class ReviewComp extends React.Component {
     
     componentDidMount() {
       this.getReviews('false')
-        .then(({data}) => {
-          this.setState(data)
-      })
     }
 
     getReviews(sortedByRecent) {
@@ -46,16 +43,16 @@ class ReviewComp extends React.Component {
     render() {
     return this.state.reviews ? (
         <div style={{borderTop: '1px solid silver', flex: 1, display: 'flex', padding: 18}}>
-        <Statbar stats={this.state.stats} />
-        <Pictures pics={this.state.pics}/>
-          {/*<MentionedWords />*/}
-          {<Reviews reviews={this.state.reviews} total={this.state.stats.total} getReviews={this.getReviews}/>}
+          <Statbar stats={this.state.stats} style={{flex: 1}}/>
+          <div style={{flexFlow: 'row wrap'}}>
+            <Pictures pics={this.state.pics} style={{flex: 1}}/>
+              {/*<MentionedWords />*/}
+              {<Reviews reviews={this.state.reviews} total={this.state.stats.total} getReviews={this.getReviews}/>}
+          </div>
         </div>
     ) : <div></div>
   }
 }
-
-
 
 // ReactDOM.render(<ReviewComp />, document.getElementById('reviews'))
 ReactDOM.render(<Router><Route path="/:id" component={ReviewComp}/></Router>, document.getElementById('reviews'))

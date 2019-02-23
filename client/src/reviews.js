@@ -4,21 +4,31 @@ import SingleReview from './singleReview'
 class Reviews extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      sortedByRecent: false,
+    }
   }
 
   render() {
-    if (props.reviews) {
+    if (this.props.reviews) {
       return (
         <div>
-          <h3>Showing 1-8 of {props.total} reviews</h3>
-          <form onSubmit={props.getReviews}>
-            <select>
+          <h3>Showing 1-8 of {this.props.total} reviews</h3>
+          <form onSubmit={function (e) {
+            e.preventDefault()
+            props.getReviews(this.state.sortedByRecent)}
+          }>
+            <select onChange={function (e) {
+              console.log('select target value', e.target.value)
+              // if (e.target) {
+
+              // }
+            }}>
               <option>Top Reviews</option>
               <option>Most recent</option>
             </select>
           </form>
-          {props.Reviews.map((rev, i) => (<SingleReview key={i} review={rev}/>))}
+          {this.props.reviews.map((rev, i) => (<SingleReview key={i} review={rev}/>))}
         </div>)
     } else {
       return <div></div>
