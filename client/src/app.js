@@ -50,11 +50,11 @@ class ReviewComp extends React.Component {
 
     render() {
     return (
-        <div style={{borderTop: '1px solid silver', flex: 1}}>
+        <div style={{borderTop: '1px solid silver', flex: 1, display: 'flex', padding: 18}}>
         <Statbar stats={this.state.stats} />
         <Pictures pics={this.state.pics}/>
           {/*<MentionedWords />*/}
-          {/*<Reviews reviews={this.state.reviews} total={this.state.stats.total} getReviews={this.getReviews}/>*/}
+          {<Reviews reviews={this.state.reviews} total={this.state.stats.total} getReviews={this.getReviews}/>}
         </div>
     )
   }

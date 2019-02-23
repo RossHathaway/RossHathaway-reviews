@@ -7,7 +7,7 @@ class Pictures extends React.Component {
   }
 
   render() {
-      return (<div>
+      return (<div style={{align: 'left'}}>
         <h3>Customer Images</h3>
         <div>
           {this.props.pics ?  

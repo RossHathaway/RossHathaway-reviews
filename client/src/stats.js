@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import Ratings from './ratings'
+
 // stats: {'1': #, '2': #, '3': #, '4': #, '5': #, total: #, ave: #}
 const Statbar = (props) => {
   if (props.stats) {
@@ -11,12 +12,13 @@ const Statbar = (props) => {
       span.push(<img src={'./emptyStar.png'} key={i}/>)
     }
     console.log(span)
-    return (<div style={{width: '300px', height: '100%', float: 'left'}}>
+    return (<div style={{width: '300px', maxWidth: '300px', minWidth: '300px', height: '100%', float: 'left', alignSelf: 'stretch'}}>
       {/* onMouseOver={/* underline and turn orange */} 
-      <h4>{props.stats.total} customer reviews</h4>
+      <h2>{props.stats.total} customer reviews</h2>
       <span style={{width: '60%', height: '20%'}}>{span}</span>
       {/* onMouseOver={/* modal, underline text in orange */}
-      <span >{props.stats.ave} out of 5 stars</span>
+      <a title="Amazon calculates a product’s star ratings based on a machine learned model instead of a raw data average. The model takes into account factors including the age of a rating, whether the ratings are from verified purchasers, and factors that establish reviewer trustworthiness.">{props.stats.ave} out of 5 stars</a>
+      <Ratings stats={props.stats}/>
     </div>)
   } else {
     return <div></div>
