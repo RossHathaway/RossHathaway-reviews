@@ -84,10 +84,10 @@ app.get(['/:id', '/:id/:recent'], (req, res) => {
   })
 })
 
-// app.get('*', (req, res) => {
-//   console.log('received request to /bundle')
-//   res.sendFile(path.join(__dirname, '../client/public/index.html'))
-// })
+app.get('*', (req, res) => {
+  console.log('received request to /bundle')
+  res.sendFile(path.join(__dirname, '../client/public/index.html'))
+})
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
