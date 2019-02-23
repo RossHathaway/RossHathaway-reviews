@@ -11,13 +11,18 @@ const Statbar = (props) => {
     for (let i = 1; i <= (5 - Math.round(props.ave)); i++) {
       span.push(<img src={'./emptyStar.png'} key={i}/>)
     }
-    console.log(span)
     return (<div style={{width: '300px', maxWidth: '300px', minWidth: '300px', height: '100%', float: 'left', alignSelf: 'stretch'}}>
       {/* onMouseOver={/* underline and turn orange */} 
       <h2>{props.stats.total} customer reviews</h2>
       <span style={{width: '60%', height: '20%'}}>{span}</span>
       {/* onMouseOver={/* modal, underline text in orange */}
-      <a title="Amazon calculates a product’s star ratings based on a machine learned model instead of a raw data average. The model takes into account factors including the age of a rating, whether the ratings are from verified purchasers, and factors that establish reviewer trustworthiness.">{props.stats.ave} out of 5 stars</a>
+      <span>{/* position relative */}
+        <div>
+          {/* tool tip uses refs position absolute */}
+        </div>
+        {props.stats.ave} out of 5 stars
+      </span>
+      {/* "Amazon calculates a product’s star ratings based on a machine learned model instead of a raw data average. The model takes into account factors including the age of a rating, whether the ratings are from verified purchasers, and factors that establish reviewer trustworthiness." */}
       <Ratings stats={props.stats}/>
     </div>)
   } else {

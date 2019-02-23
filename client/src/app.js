@@ -47,7 +47,7 @@ class ReviewComp extends React.Component {
           <div style={{flexFlow: 'row wrap'}}>
             <Pictures pics={this.state.pics} style={{flex: 1}}/>
               {/*<MentionedWords />*/}
-              {<Reviews reviews={this.state.reviews} total={this.state.stats.total} getReviews={this.getReviews}/>}
+            <Reviews reviews={this.state.reviews} total={this.state.stats.total} getReviews={this.getReviews}/>
           </div>
         </div>
     ) : <div></div>
