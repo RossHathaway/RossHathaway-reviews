@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 // import ReactModal from 'react-modal';
 import axios from 'axios'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Statbar from './stats.js'
 import Pictures from './pictures.js'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import Reviews from './reviews.js'
 // import stylecomponents from 'stylecomponents'
 /*
 const reviewbody = stylecomponents.div`styles`
@@ -27,36 +28,30 @@ class ReviewComp extends React.Component {
     }
     
     componentDidMount() {
+      this.getReviews('false')
+        .then(({data}) => {
+          this.setState(data)
+      })
+    }
+
+    getReviews(sortedByRecent) {
       // another way to get id: window.location.href.split('/')
       // axios.get(`http://18.221.115.47/${this.state.prodId}/false`)
-      axios.get(`http://localhost:3001/${this.state.prodId}`)
+      axios.get(`http://localhost:3001/${this.state.prodId}/${sortedByRecent}`)
         .then(({data}) => {
-          console.log(data)
           this.setState(data)
         })
     }
 
-    getReviews() {
-      axios.get(`/`, {
-        params: {
-          prodId: (prod_id || 100), 
-          recent: this.state.sortedByRecent
-        }
-      })
-        .then(({data}) => {
-          this.setState(data)
-      })
-    }
-
     render() {
-    return (
+    return this.state.reviews ? (
         <div style={{borderTop: '1px solid silver', flex: 1, display: 'flex', padding: 18}}>
         <Statbar stats={this.state.stats} />
         <Pictures pics={this.state.pics}/>
           {/*<MentionedWords />*/}
           {<Reviews reviews={this.state.reviews} total={this.state.stats.total} getReviews={this.getReviews}/>}
         </div>
-    )
+    ) : <div></div>
   }
 }
 

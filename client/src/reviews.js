@@ -12,7 +12,7 @@ class Reviews extends React.Component {
       return (
         <div>
           <h3>Showing 1-8 of {props.total} reviews</h3>
-          <form>
+          <form onSubmit={props.getReviews}>
             <select>
               <option>Top Reviews</option>
               <option>Most recent</option>
