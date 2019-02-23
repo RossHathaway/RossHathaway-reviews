@@ -7,6 +7,23 @@ class Reviews extends React.Component {
     this.state = {
       sortedByRecent: false,
     }
+    this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  onChange(e) {
+    console.log('select target value', e.target.value)
+    if (e.target.value === 'Most recent') {
+      this.props.getReviews('true')
+    } else {
+      this.props.getReviews('false')
+    }
+  }
+
+  onSubmit(e) {
+    e.preventDefault()
+    console.log('form submitted')
+    
   }
 
   render() {
@@ -14,16 +31,8 @@ class Reviews extends React.Component {
       return (
         <div>
           <h3>Showing 1-8 of {this.props.total} reviews</h3>
-          <form onSubmit={function (e) {
-            e.preventDefault()
-            props.getReviews(this.state.sortedByRecent)}
-          }>
-            <select onChange={function (e) {
-              console.log('select target value', e.target.value)
-              // if (e.target) {
-
-              // }
-            }}>
+          <form onSubmit={this.onSubmit}>
+            <select onChange={this.onChange}>
               <option>Top Reviews</option>
               <option>Most recent</option>
             </select>

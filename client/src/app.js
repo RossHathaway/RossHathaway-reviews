@@ -34,6 +34,7 @@ class ReviewComp extends React.Component {
     getReviews(sortedByRecent) {
       // another way to get id: window.location.href.split('/')
       // axios.get(`http://18.221.115.47/${this.state.prodId}/false`)
+      console.log('getting reviews with ', sortedByRecent)
       axios.get(`http://localhost:3001/${this.state.prodId}/${sortedByRecent}`)
         .then(({data}) => {
           this.setState(data)
