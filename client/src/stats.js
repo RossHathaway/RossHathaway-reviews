@@ -11,7 +11,7 @@ const Statbar = (props) => {
       span.push(<img src={'./emptyStar.png'} key={i}/>)
     }
     console.log(span)
-    return (<div>
+    return (<div style={{width: '300px', height: '100%', float: 'left'}}>
       {/* onMouseOver={/* underline and turn orange */} 
       <h4>{props.stats.total} customer reviews</h4>
       <span style={{width: '60%', height: '20%'}}>{span}</span>
