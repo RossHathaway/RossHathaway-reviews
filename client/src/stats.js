@@ -6,15 +6,15 @@ const Statbar = (props) => {
   if (props.stats) {
     let span = []
     for (let i = 1; i <= Math.round(props.stats.ave); i++) {
-      span.push(<img src={'./fullStar.png'} key={i}/>)
+      span.push(<img src={'http://localhost:3001/fullStar.png'} key={i}/>)
     }
-    for (let i = 1; i <= (5 - Math.round(props.ave)); i++) {
-      span.push(<img src={'./emptyStar.png'} key={i}/>)
+    for (let i = 1; i <= (5 - Math.round(props.stats.ave)); i++) {
+      span.push(<img src={'http://localhost:3001/emptyStar.png'}/>)
     }
     return (<div style={{width: '300px', maxWidth: '300px', minWidth: '300px', height: '100%', float: 'left', alignSelf: 'stretch'}}>
       {/* onMouseOver={/* underline and turn orange */} 
       <h2>{props.stats.total} customer reviews</h2>
-      <span style={{width: '60%', height: '20%'}}>{span}</span>
+      <span>{span}</span>
       {/* onMouseOver={/* modal, underline text in orange */}
       <span>{/* position relative */}
         <div>

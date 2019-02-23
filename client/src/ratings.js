@@ -14,12 +14,10 @@ const Ratings = (props) => {
           return (
             <div>
               <span>{num} star</span>
-              {/*style={{width: '196px', position: 'relative'}}*/}
-              <span style={{width: '196px', position: 'relative', display: 'inline-block'}}>
-                {/*style={{-backgroundColor: 'yellow', width: `50%`}}*/}
-                <span style={{backgroundColor: 'yellow', width: percent + '%', display: 'inline-block', }}>&nbsp;</span>
-                <span style={{backgroundColor: 'silver', width: (100 - percent) + '%', display: 'inline-block'}}> &nbsp;</span>
-              </span>
+              <div style={{width: '196px', position: 'relative', display: 'inline-block'}}>
+                <div style={{backgroundColor: 'yellow', width: percent + '%', display: 'inline-block', }}>&nbsp;</div>
+                <div style={{backgroundColor: 'silver', width: (100 - percent) + '%', display: 'inline-block'}}> &nbsp;</div>
+              </div>
               <span>{percent}%</span>
             </div>
           )
