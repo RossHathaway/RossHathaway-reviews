@@ -12,13 +12,13 @@ app.use(morgan('dev'))
 app.use(cors())
 app.use(express.static(path.join(__dirname, '../client/public')))
 
-app.get('/fullStar.png', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public/fullStar.png'))
-})
+// app.get('/fullStar.png', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/public/fullStar.png'))
+// })
 
-app.get('/emptyStar.png', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public/emptyStar.png'))
-})
+// app.get('/emptyStar.png', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/public/emptyStar.png'))
+// })
 
 app.get('/bundle', (req, res) => {
   console.log('received request to /bundle')

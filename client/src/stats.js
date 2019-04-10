@@ -6,12 +6,12 @@ const Statbar = (props) => {
   if (props.stats) {
     let span = []
     for (let i = 1; i <= Math.round(props.stats.ave); i++) {
-      // http://localhost:3001/fullStar.png
-      span.push(<img src={'http://18.221.115.47/fullStar.png'} key={i}/>)
+      // http://18.221.115.47/fullStar.png
+      span.push(<img src={'http://localhost:3001/fullStar.png'} key={i}/>)
     }
     for (let i = 1; i <= (5 - Math.round(props.stats.ave)); i++) {
-      // http://localhost:3001/emptyStar.png
-      span.push(<img src={'http://18.221.115.47/emptyStar.png'}/>)
+      // http://localhost:3001/emptyStar.png http://18.221.115.47/emptyStar.png
+      span.push(<img src={'http://localhost:3001/emptyStar.png'}/>)
     }
     return (<div style={{width: '300px', maxWidth: '300px', minWidth: '300px', height: '100%', float: 'left', alignSelf: 'stretch'}}>
       {/* onMouseOver={/* underline and turn orange */} 
