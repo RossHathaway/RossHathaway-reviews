@@ -5,6 +5,8 @@ const db = new Sqlite.Database('db.fakeData', (err) => {
   else console.log('connected to DB in dbIndex.js')
 })
 
+module.exports = db
+
 const rowCount = db.get('SELECT COUNT(*) FROM products', (err, row) => {
   if (err || row === 0) {
     console.log('count: ', row)
@@ -13,4 +15,3 @@ const rowCount = db.get('SELECT COUNT(*) FROM products', (err, row) => {
   } 
 }) 
 
-module.exports = db

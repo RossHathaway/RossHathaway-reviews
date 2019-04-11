@@ -1,5 +1,5 @@
 {
-  "name": "RossHathaway-reviews",
+  "name": "AmazonReviews",
   "version": "1.0.0",
   "description": "Amazon product page review component",
   "author": "Ross Hathaway",
@@ -31,6 +31,7 @@
     }
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cors": "^2.8.5",
     "css-loader": "^2.1.0",
     "faker": "^4.1.0",
@@ -53,6 +54,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "morgan": "^1.9.1",
     "npm-check-updates": "^2.15.0",
     "webpack": "^4.29.1",
     "webpack-cli": "^3.2.3",

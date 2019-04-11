@@ -1,5 +1,7 @@
 const express = require('express')
+console.log('about to require sqlite3 in index.js')
 const Sqlite = require('sqlite3').verbose()
+console.log('about to require db')
 const db = require('../database/dbIndex.js')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -10,15 +12,7 @@ const app = express()
 
 app.use(morgan('dev'))
 app.use(cors())
-app.use(express.static(path.join(__dirname, '../client/public')))
-
-// app.get('/fullStar.png', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/public/fullStar.png'))
-// })
-
-// app.get('/emptyStar.png', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/public/emptyStar.png'))
-// })
+app.use(['/:id', '/:id/:recent'], express.static(path.join(__dirname, '../client/public')))
 
 app.get('/bundle', (req, res) => {
   console.log('received request to /bundle')
@@ -26,7 +20,6 @@ app.get('/bundle', (req, res) => {
 })
 
 app.get(['/:id', '/:id/:recent'], (req, res) => {
-  console.log('running database queries')
   console.log('recent', req.params.recent)
   let pics = null
   let reviews = null
@@ -84,10 +77,10 @@ app.get(['/:id', '/:id/:recent'], (req, res) => {
   })
 })
 
-app.get('*', (req, res) => {
-  console.log('received request to /bundle')
-  res.sendFile(path.join(__dirname, '../client/public/index.html'))
-})
+// app.get('*', (req, res) => {
+//   console.log('received request to /bundle')
+//   res.sendFile(path.join(__dirname, '../client/public/index.html'))
+// })
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
